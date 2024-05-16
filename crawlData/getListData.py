@@ -2,16 +2,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 import csv
 
-# 设置Chrome浏览器驱动路径
-chrome_driver_path = "path_to_chromedriver"
-
-# 设置Chrome选项
-options = webdriver.ChromeOptions()
-options.binary_location = "path_to_chrome_executable"  # 如果需要指定Chrome可执行文件的路径
-
-# 创建一个Chrome浏览器实例
-driver = webdriver.Chrome(options=options)
-
+driver = webdriver.Chrome()
 # 打开目标网页
 url = "https://shpolicy.ssme.sh.gov.cn/knowledge/#/home"
 driver.get(url)
@@ -27,6 +18,7 @@ driver.quit()
 
 # 使用BeautifulSoup解析网页内容
 soup = BeautifulSoup(html_content, 'html.parser')
+target_elements = soup.find_all("a", string="关于印发《上海市设施农业现代化提升行动方案（2024-2027年）》的通知")
 
 # 在HTML块中找到所有政府文件的链接
 list_items = soup.find_all("div", class_="ant-list-item-meta-content")
